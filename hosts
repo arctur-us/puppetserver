@@ -1,4 +1,10 @@
+
+
 # hosts
 
 [master]
 puppet ansible_host=192.168.56.6
+
+[all:vars]
+ansible_connection=ssh
+ansible_user=centos
