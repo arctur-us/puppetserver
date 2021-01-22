@@ -1,0 +1,18 @@
+# hostname.yml
+---
+  - name: Puppet Hostname
+    hosts: puppet
+    vars:
+      hosts_file: /etc/hosts
+    tasks:
+      - name: checking for "{{ hosts_file }}"
+        shell: grep -c "^puppet" "{{ hosts_file }}" || true
+        register: check_grep
+        changed_when: False
+
+      - name: add hostname
+        become: True
+        lineinfile:
+          dest: "{{ hosts_file }}"
+          line: 127.0.0.1 puppet
+        when: check_grep.stdout == "0"
