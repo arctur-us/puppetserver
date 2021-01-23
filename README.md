@@ -7,7 +7,7 @@ The server must be accessible via ssh by `centos` user, who has to have `sudo` p
 ### Dependencies
 * [ansible](https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html)
 
-### User installation
+### Setup
 Download the repository from GitHub and run locally on a terminal:
 ```
 git clone https://github.com/yerbolkhassen/puppetserver.git
