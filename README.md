@@ -1,5 +1,5 @@
 # Puppet Server
-Runs Puppet master on CentOS server with Ansible
+Runs Puppet master on CentOS 8 server with Ansible
 
 ## Installation
 The server must be accessible via ssh by `centos` user, who has to have `sudo` permissions. Also public key authentication must be enabled. The IP address could be changed in _hosts_ file.
