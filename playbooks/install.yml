@@ -5,7 +5,7 @@
     become: true
     tasks:
       - name: Search relevant RPM
-        yum: name=https://yum.puppet.com/puppet5-release-el-7.noarch.rpm
+        yum: name=https://yum.puppet.com/puppet5-release-el-8.noarch.rpm
 
       - name: Check puppet with yum
         yum:
