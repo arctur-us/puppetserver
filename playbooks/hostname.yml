@@ -5,12 +5,12 @@
     vars:
       hosts_file: /etc/hosts
     tasks:
-      - name: checking for "{{ hosts_file }}"
+      - name: Checking for "{{ hosts_file }}"
         shell: grep -c "^puppet" "{{ hosts_file }}" || true
         register: check_grep
         changed_when: False
 
-      - name: add hostname
+      - name: Add hostname
         become: True
         lineinfile:
           dest: "{{ hosts_file }}"
