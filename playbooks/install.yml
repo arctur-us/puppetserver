@@ -2,6 +2,7 @@
 ---
   - name: Setup puppet
     hosts: puppet
+    become: true
     tasks:
       - name: Search relevant RPM
         yum: name=https://yum.puppet.com/puppet5-release-el-7.noarch.rpm
@@ -23,14 +24,12 @@
           masked: no
 
       - name: Make sure firewall is running
-        become: True
         service:
           name: firewalld
           state: started
           enabled: True
 
       - name: Permit traffic for a service
-        become: True
         ansible.posix.firewalld:
           permanent: yes
           port: 8140/tcp
