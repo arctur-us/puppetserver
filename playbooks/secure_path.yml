@@ -1,17 +1,17 @@
 # secure_path.yml
 ---
   - name: Allow sudoers run service
-    hosts: puppet
+    hosts: master
+    gather_facts: no
     vars:
       sudoers_file: /etc/sudoers
     become: True
     tasks:
       - name: Checking for "{{ sudoers_file }}"
-        shell: grep -c "^puppet" "{{ sudoers_file }}" || true
+        shell: grep -c "puppet" "{{ sudoers_file }}" || true
         register: missing
         changed_when: False
 
-      # Bug: condition is not working properly
       - name: Change permissions for sudoers
         ansible.builtin.file:
           path: "{{ sudoers_file }}"
@@ -26,7 +26,6 @@
           backrefs: yes
         when: missing.stdout == "0"
 
-      # Bug: condition is not working properly
       - name: Change back permissions for sudoers
         ansible.builtin.file:
           path: "{{ sudoers_file }}"

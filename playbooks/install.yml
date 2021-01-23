@@ -1,37 +1,23 @@
 # install.yml
 ---
   - name: Setup puppet
-    hosts: puppet
-    become: true
+    hosts: master
+    gather_facts: no
+    become: True
     tasks:
-      - name: Search relevant RPM
-        yum: name=https://yum.puppet.com/puppet5-release-el-8.noarch.rpm
+      - name: Check if RPM package is installed
+        shell: rpm -qa | grep puppet
+        ignore_errors: yes
+        changed_when: False
+        register: rpm_check
 
-      - name: Check puppet with yum
+      - name: Install RPM package
+        shell: rpm -Uvh https://yum.puppet.com/puppet5-release-el-8.noarch.rpm
+        ignore_errors: yes
+        changed_when: False
+        when: rpm_check.rc == 1
+
+      - name: Install with yum
         yum:
-          name: puppet
+          name: puppetserver
           state: present
-
-      - name: Make sure a service is running
-        ansible.builtin.systemd:
-          name: puppetserver
-          state: started
-
-      - name: Enable service and make sure it is not masked
-        ansible.builtin.systemd:
-          name: puppetserver
-          enabled: yes
-          masked: no
-
-      - name: Make sure firewall is running
-        service:
-          name: firewalld
-          state: started
-          enabled: True
-
-      - name: Permit traffic for a service
-        ansible.posix.firewalld:
-          permanent: yes
-          port: 8140/tcp
-          state: enabled
-          immediate: True

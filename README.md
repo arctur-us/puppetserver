@@ -12,7 +12,7 @@ Download the repository from GitHub and run locally on a terminal:
 ```
 git clone https://github.com/yerbolkhassen/puppetserver.git
 cd puppetserver
-ansible-playbook playbook/all.yml -i hosts
+ansible-playbook playbook/all.yml
 ```
 
 ## Contributors

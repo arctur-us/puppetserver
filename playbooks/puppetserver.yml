@@ -1,0 +1,23 @@
+# puppetserver.yml
+---
+  - name: Run service
+    hosts: master
+    gather_facts: no
+    become: True
+    vars:
+      service_file: /etc/sysconfig/puppetserver
+    tasks:
+      - name: Memory allocation
+        ansible.builtin.replace:
+          path: "{{ service_file }}"
+          regexp: 'Xms2g -Xmx2g'
+          replace: 'Xms1g -Xmx1g'
+        register: memory
+
+      - name: Make sure a service is running
+        service:
+          name: puppetserver
+          state: started
+          enabled: yes
+          masked: no
+        when: memory.changed

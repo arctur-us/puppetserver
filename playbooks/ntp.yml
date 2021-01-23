@@ -1,0 +1,12 @@
+# ntp.yml
+---
+  - name: Configure NTP
+    hosts: master
+    gather_facts: no
+    become: True
+    tasks:
+      - name: Make sure chrony is running
+        service:
+          name: chronyd
+          state: started
+          enabled: True

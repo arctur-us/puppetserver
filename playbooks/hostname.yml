@@ -1,7 +1,10 @@
 # hostname.yml
+# The Puppet agent uses the hostname to communicate with the Puppet Server.
+# So, make sure agent nodes can resolve the hostname of the Puppet Server
+# with the help of /etc/hosts file
 ---
   - name: Puppet Hostname
-    hosts: puppet
+    hosts: master
     vars:
       hosts_file: /etc/hosts
     tasks:

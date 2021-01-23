@@ -1,0 +1,19 @@
+# firewall.yml
+---
+  - name: Configure firewall
+    hosts: master
+    gather_facts: no
+    become: True
+    tasks:
+      - name: Make sure firewall is running
+        service:
+          name: firewalld
+          state: started
+          enabled: True
+
+      - name: Permit traffic for a service
+        ansible.posix.firewalld:
+          permanent: yes
+          port: 8140/tcp
+          state: enabled
+          immediate: True
