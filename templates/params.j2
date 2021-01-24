@@ -3,8 +3,8 @@ class wipe::params {
   $mac_addr = $::macaddress
 
   case $::macaddress {
-    '08:00:27:5b:24:2d': { # agentubuntu
-      $redalert = 'True'
+    '08:00:27:5b:24:2d': { # agentubuntu Works - checked!
+      $redalert = 'False'
     }
     '08:00:27:53:ed:98': { # agentfedora
       $redalert = 'False'
