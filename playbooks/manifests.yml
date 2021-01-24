@@ -1,6 +1,9 @@
 # manifests.yml
 ---
   - name: Add manifests
+    hosts: master
+    gather_facts: no
+    become: True
     vars:
       modules: /etc/puppetlabs/code/environments/production/modules/wipe/manifests
     tasks:
@@ -10,4 +13,4 @@
       - name:
         template:
           src: templates/params.j2
-          dest: "{{ modules }}"/params.pp
+          dest: "{{ modules }}/params.pp"
