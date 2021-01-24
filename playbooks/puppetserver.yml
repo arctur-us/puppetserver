@@ -32,4 +32,10 @@
           state: started
           enabled: yes
           masked: no
+
+      - name: Restart a service
+        service:
+          name: puppetserver
+          state: restarted
+          enabled: yes
         when: (memory.changed) or (autosign.stdout == "0")
