@@ -12,5 +12,5 @@
 
       - name:
         template:
-          src: templates/params.j2
+          src: ../templates/params.j2
           dest: "{{ modules }}/params.pp"
