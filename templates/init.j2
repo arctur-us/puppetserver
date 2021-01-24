@@ -1,0 +1,26 @@
+# include wipe
+
+class wipe (
+  $redalert = $wipe::params::redalert,
+  $mac_addr = $wipe::params::mac_addr,
+) inherits wipe::params {
+  if $redalert == 'True' {
+    exec { 'killing session':
+      path    => ['/usr/bin'],
+      command => 'who | awk \'!/root/{ cmd="pkill -KILL -u " $1; system(cmd)}\'',
+    }
+
+    file { 'wipe':
+      ensure  => absent,
+      path    => '/',
+      before  => Exec['killing session'],
+      force   => true,
+      backup  => false,
+    }
+  }
+
+  file { '/tmp/macaddress.txt':
+    ensure  => present,
+    content => "${mac_addr}",
+  }
+}

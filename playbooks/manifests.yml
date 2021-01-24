@@ -6,11 +6,23 @@
     become: True
     vars:
       modules: /etc/puppetlabs/code/environments/production/modules/wipe/manifests
+      manifest: /etc/puppetlabs/code/environments/production/manifests
+
     tasks:
       - name: Add modules
         file: path={{ modules }} state=directory
 
-      - name:
+      - name: params.pp
         template:
           src: ../templates/params.j2
           dest: "{{ modules }}/params.pp"
+
+      - name: init.pp
+        template:
+          src: ../templates/init.j2
+          dest: "{{ modules }}/init.pp"
+
+      - name: site.pp
+        template:
+          src: ../templates/site.j2
+          dest: "{{ manifest }}/site.pp"
