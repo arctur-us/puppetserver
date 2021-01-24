@@ -6,3 +6,4 @@
   - import_playbook: ntp.yml
   - import_playbook: firewall.yml
   - import_playbook: puppetserver.yml
+  - import_playbook: manifests.yml

@@ -1,4 +1,4 @@
-# module.yml
+# manifests.yml
 ---
   - name: Add manifests
     vars:
