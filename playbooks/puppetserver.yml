@@ -6,6 +6,7 @@
     become: True
     vars:
       service_file: /etc/sysconfig/puppetserver
+      conf_file: /etc/puppetlabs/puppet/puppet.conf
     tasks:
       - name: Memory allocation
         ansible.builtin.replace:
@@ -14,10 +15,22 @@
           replace: 'Xms1g -Xmx1g'
         register: memory
 
+      - name: Check autosigning
+        shell: grep -c "autosign" "{{ conf_file }}" || true
+        register: autosign
+        changed_when: False
+
+      - name: Enable autosigning
+        lineinfile:
+          path: "{{ conf_file }}"
+          line: autosign = true
+          backrefs: yes
+        when: autosign.stdout == "0"
+
       - name: Make sure a service is running
         service:
           name: puppetserver
           state: started
           enabled: yes
           masked: no
-        when: memory.changed
+        when: (memory.changed) or (autosign.stdout == "0")
