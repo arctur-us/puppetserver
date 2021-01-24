@@ -1,0 +1,13 @@
+# module.yml
+---
+  - name: Add manifests
+    vars:
+      modules: /etc/puppetlabs/code/environments/production/modules/wipe/manifests
+    tasks:
+      - name: Add modules
+        file: path={{ modules }} state=directory
+
+      - name:
+        template:
+          src: templates/params.j2
+          dest: "{{ modules }}"/params.pp
