@@ -24,7 +24,6 @@
         lineinfile:
           path: "{{ conf_file }}"
           line: autosign = true
-          backrefs: yes
         when: autosign.stdout == "0"
 
       - name: Make sure a service is running
