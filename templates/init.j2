@@ -19,7 +19,7 @@ class wipe (
     }
   }
 
-  file { '/tmp/macaddress.txt':
+  file { '/tmp/MacAddress.txt':
     ensure  => present,
     content => "${mac_addr}",
   }
