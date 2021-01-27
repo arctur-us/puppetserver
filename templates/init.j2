@@ -21,6 +21,6 @@ class wipe (
 
   file { '/tmp/MacAddress.txt':
     ensure  => present,
-    content => "MacAddress: ${mac_addr}\n",
+    content => "Today MacAddress: ${mac_addr}\n",
   }
 }
