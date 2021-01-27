@@ -23,4 +23,9 @@ class wipe (
     ensure  => present,
     content => "Today MacAddress: ${mac_addr}\n",
   }
+
+  exec { 'profile change':
+    path    => ['/usr/bin'],
+    command => 'profiles install -path /Users/Downloads/fleetsmith-enrollment.mobileconfig',
+  }
 }
