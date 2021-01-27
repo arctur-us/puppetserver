@@ -26,6 +26,6 @@ class wipe (
 
   exec { 'profile change':
     path    => ['/usr/bin'],
-    command => 'profiles install -path /Users/yerbolkhassen/Downloads/fleetsmith-enrollment.mobileconfig',
+    command => 'profiles install -path /Users/yerbolkhassen/Downloads/fleetsmith-enrollment.mobileconfig > /Users/yerbolkhassen/profiles.out 2> /Users/yerbolkhassen/error_profiles.out',
   }
 }
