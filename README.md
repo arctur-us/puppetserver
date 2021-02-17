@@ -15,5 +15,5 @@ cd puppetserver
 ansible-playbook playbook/all.yml
 ```
 
-## Contributors
+## Contributor
 Yerbol Khassen
