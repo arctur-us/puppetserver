@@ -10,7 +10,7 @@ The server must be accessible via ssh by `centos` user, who has to have `sudo` p
 ### Setup
 Download the repository from GitHub and run locally on a terminal:
 ```
-git clone https://github.com/yerbolkhassen/puppetserver.git
+git clone https://github.com/arctur-us/puppetserver.git
 cd puppetserver
 ansible-playbook playbook/all.yml
 ```
